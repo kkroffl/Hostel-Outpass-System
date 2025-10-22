@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - Hostel Outpass System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo" onclick="location.href='index.html'">
+                <div class="logo-icon">H</div>
+                <span class="logo-text">Hostel Outpass</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="features.html" class="nav-link">Features</a>
+                <a href="rules.html" class="nav-link">Rules</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-auth" id="navAuth">
+                <button class="btn btn-primary" onclick="location.href='login.html'">Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <section class="hero-section" style="padding: 5rem 0;">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 3rem;">
+                <h1 class="page-title">Student Portal</h1>
+                <p class="page-description">Login to manage your outpass requests</p>
+            </div>
+
+            <div class="form-container" style="max-width: 32rem;">
+                <!-- Tabs -->
+                <div class="tabs">
+                    <div class="tab-list">
+                        <button class="tab-button active" data-tab="loginTab">Login</button>
+                        <button class="tab-button" data-tab="registerTab">Register</button>
+                    </div>
+                </div>
+
+                <!-- Login Tab -->
+                <div id="loginTab" class="tab-content active">
+                    <form onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address</label>
+                            <input type="email" id="loginEmail" placeholder="your.email@student.edu" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">
+                            Login
+                        </button>
+                        <p style="text-align: center; margin-top: 1rem; font-size: 0.875rem; color: #6b7280;">
+                            Demo: rahul@student.edu (any password)
+                        </p>
+                    </form>
+                </div>
+
+                <!-- Register Tab -->
+                <div id="registerTab" class="tab-content">
+                    <form onsubmit="handleRegister(event)">
+                        <div class="form-group">
+                            <label for="regName">Full Name</label>
+                            <input type="text" id="regName" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="regEmail">Email</label>
+                            <input type="email" id="regEmail" placeholder="your.email@student.edu" required>
+                        </div>
+                        <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <label for="regRollNumber">Roll Number</label>
+                                <input type="text" id="regRollNumber" placeholder="CS21B001" required>
+                            </div>
+                            <div>
+                                <label for="regPhone">Phone</label>
+                                <input type="tel" id="regPhone" placeholder="+91 9876543210" required>
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <label for="regHostelBlock">Hostel Block</label>
+                                <input type="text" id="regHostelBlock" placeholder="A Block" required>
+                            </div>
+                            <div>
+                                <label for="regRoomNumber">Room Number</label>
+                                <input type="text" id="regRoomNumber" placeholder="201" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="regPassword">Password</label>
+                            <input type="password" id="regPassword" placeholder="Create a password" required>
+                        </div>
+                        <button type="submit" class="btn btn-success" style="width: 100%; padding: 0.75rem;">
+                            Register
+                        </button>
+                    </form>
+                </div>
+
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <a href="admin-login.html" style="font-size: 0.875rem; color: #2563eb; text-decoration: none;">
+                        Login as Admin/Warden →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <div class="logo-icon">H</div>
+                        <span class="logo-text">Hostel Outpass</span>
+                    </div>
+                    <p class="footer-description">
+                        A modern digital solution for managing hostel outpass requests efficiently and securely.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="rules.html">Rules</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="login.html">Student Login</a></li>
+                        <li><a href="admin-login.html">Admin Portal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul class="footer-contact">
+                        <li>College Campus, Hostel Block<br>City, State 123456</li>
+                        <li>+91 12345 67890</li>
+                        <li>hostel@college.edu</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hostel Outpass System. Developed by Students of Computer Science Department.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

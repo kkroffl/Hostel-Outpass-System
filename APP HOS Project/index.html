@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Outpass System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo" onclick="location.href='index.html'">
+                <div class="logo-icon">H</div>
+                <span class="logo-text">Hostel Outpass</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="features.html" class="nav-link">Features</a>
+                <a href="rules.html" class="nav-link">Rules</a>
+                <a href="contact.html" class="nav-link">Contact Us</a>
+            </div>
+            <div class="nav-auth" id="navAuth">
+                <button class="btn btn-primary" onclick="location.href='login.html'">Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        Smart Hostel <span class="text-primary">Outpass</span> Management
+                    </h1>
+                    <p class="hero-description">
+                        Say goodbye to paperwork! Manage your hostel outpass requests digitally with instant approvals,
+                        real-time tracking, and secure record keeping.
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary btn-lg" onclick="handleCTA()">Request Outpass</button>
+                        <button class="btn btn-outline btn-lg" onclick="location.href='about.html'">Learn More</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-glow"></div>
+                    <img src="https://images.unsplash.com/photo-1615431303449-9ad9207d05de" alt="Modern College Campus"
+                        class="rounded-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card stat-blue">
+                    <div class="stat-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">100% Secure</h3>
+                        <p class="stat-label">End-to-end encrypted system with secure authentication</p>
+                    </div>
+                </div>
+                <div class="stat-card stat-green">
+                    <div class="stat-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">Fast Approval</h3>
+                        <p class="stat-label">Get your outpass approved within 12 hours</p>
+                    </div>
+                </div>
+                <div class="stat-card stat-purple">
+                    <div class="stat-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">Digital Records</h3>
+                        <p class="stat-label">Access all your outpass history anytime, anywhere</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container cta-content">
+            <h2 class="cta-title">Ready to Go Paperless?</h2>
+            <p class="cta-description">
+                Join hundreds of students already using our digital outpass system.
+            </p>
+            <button class="btn btn-white btn-lg" onclick="handleCTA()">Get Started Now</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <div class="logo-icon">H</div>
+                        <span class="logo-text">Hostel Outpass</span>
+                    </div>
+                    <p class="footer-description">
+                        A modern digital solution for managing hostel outpass requests efficiently and securely.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="rules.html">Rules</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="login.html">Student Login</a></li>
+                        <li><a href="admin-login.html">Admin Portal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul class="footer-contact">
+                        <li>SRM IST<br>Kattankulathur, Chennai 603203</li>
+                        <li>+91 12345 67890</li>
+                        <li>hostel@college.edu.in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hostel Outpass System.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
