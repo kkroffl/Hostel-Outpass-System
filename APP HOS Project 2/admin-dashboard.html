@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="firebase-init.js"></script>
+</head>
+<body>
+  <h2>Admin Dashboard</h2>
+  <button id="logout">Logout</button>
+
+  <h3>All Requests</h3>
+  <div id="allRequests">Loading...</div>
+
+  <script>
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = 'admin-login.html';
+      } else {
+        loadAllRequests();
+      }
+    });
+
+    document.getElementById('logout').onclick = () => {
+      auth.signOut();
+      window.location.href = 'admin-login.html';
+    };
+
+    function loadAllRequests() {
+      const container = document.getElementById('allRequests');
+      container.innerHTML = 'Loading...';
+      db.collection('tickets').get()
+        .then(snap => {
+          container.innerHTML = '';
+          if (snap.empty) {
+            container.innerHTML = '<p>No tickets found.</p>';
+            return;
+          }
+          snap.forEach(doc => {
+            const t = doc.data();
+            container.innerHTML += `
+              <div>
+                <strong>Reason:</strong> ${t.reason}<br>
+                <strong>Destination:</strong> ${t.destination}<br>
+                <strong>From:</strong> ${t.fromDate} ${t.fromTime}<br>
+                <strong>To:</strong> ${t.toDate} ${t.toTime}<br>
+                <strong>Contact:</strong> ${t.contact}<br>
+                <strong>Status:</strong> ${t.status}<br>
+                <button onclick="updateStatus('${doc.id}', 'approved')">Approve</button>
+                <button onclick="updateStatus('${doc.id}', 'rejected')">Reject</button>
+                <hr />
+              </div>
+            `;
+          });
+        }).catch(err => container.innerHTML = `<p>Error: ${err.message}</p>`);
+    }
+
+    function updateStatus(id, status) {
+      db.collection('tickets').doc(id).update({ status })
+        .then(() => loadAllRequests())
+        .catch(err => alert(err.message));
+    }
+  </script>
+</body>
+</html>

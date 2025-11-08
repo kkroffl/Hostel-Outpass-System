@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Register</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="firebase-init.js"></script>
+</head>
+<body>
+  <h2>Register</h2>
+  <form id="registerForm">
+    Name: <input type="text" id="name" required /><br />
+    Email: <input type="email" id="email" required /><br />
+    Password: <input type="password" id="password" required /><br />
+    Roll Number: <input type="text" id="roll" required /><br />
+    Hostel Block: <input type="text" id="hostel" required /><br />
+    Room Number: <input type="text" id="room" required /><br />
+    Phone: <input type="tel" id="phone" required /><br />
+    <button type="submit">Register</button>
+  </form>
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(userCredential => {
+          return db.collection('users').doc(userCredential.user.uid).set({
+            name: document.getElementById('name').value,
+            roll: document.getElementById('roll').value,
+            hostel: document.getElementById('hostel').value,
+            room: document.getElementById('room').value,
+            phone: document.getElementById('phone').value,
+            role: 'student'
+          });
+        })
+        .then(() => {
+          alert('Registration successful!');
+          window.location.href = "login.html";
+        })
+        .catch(e => alert(e.message));
+    });
+  </script>
+</body>
+</html>

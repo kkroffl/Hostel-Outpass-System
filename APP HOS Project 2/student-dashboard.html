@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="firebase-init.js"></script>
+</head>
+<body>
+  <h2>Student Dashboard</h2>
+  <button id="logout">Logout</button>
+
+  <form id="requestForm">
+    Reason: <input type="text" id="reason" required /><br />
+    Destination: <input type="text" id="destination" required /><br />
+    From Date: <input type="date" id="fromDate" required /><br />
+    To Date: <input type="date" id="toDate" required /><br />
+    From Time: <input type="time" id="fromTime" required /><br />
+    To Time: <input type="time" id="toTime" required /><br />
+    Contact Number: <input type="tel" id="contact" required /><br />
+    <button type="submit">Submit</button>
+  </form>
+
+  <h3>Your Tickets</h3>
+  <div id="requests">Loading...</div>
+
+  <script>
+    // Ensure Firebase auth instance is ready, then start
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = 'login.html';
+      } else {
+        loadRequests();
+      }
+    });
+
+    document.getElementById('logout').onclick = () => {
+      auth.signOut();
+      window.location.href = 'login.html';
+    };
+
+    document.getElementById('requestForm').onsubmit = e => {
+      e.preventDefault();
+      db.collection('tickets').add({
+        userId: auth.currentUser.uid,
+        reason: document.getElementById('reason').value,
+        destination: document.getElementById('destination').value,
+        fromDate: document.getElementById('fromDate').value,
+        toDate: document.getElementById('toDate').value,
+        fromTime: document.getElementById('fromTime').value,
+        toTime: document.getElementById('toTime').value,
+        contact: document.getElementById('contact').value,
+        status: 'pending'
+      }).then(() => {
+        alert('Request submitted.');
+        e.target.reset();
+        loadRequests();
+      }).catch(err => alert(err.message));
+    };
+
+    function loadRequests() {
+      const container = document.getElementById('requests');
+      container.innerHTML = 'Loading...';
+      db.collection('tickets')
+        .where('userId', '==', auth.currentUser.uid)
+        .get()
+        .then(snap => {
+          container.innerHTML = '';
+          if (snap.empty) {
+            container.innerHTML = '<p>No tickets raised yet.</p>';
+            return;
+          }
+          snap.forEach(doc => {
+            const t = doc.data();
+            container.innerHTML += `
+              <div>
+                <strong>Reason:</strong> ${t.reason}<br>
+                <strong>Destination:</strong> ${t.destination}<br>
+                <strong>From:</strong> ${t.fromDate} ${t.fromTime}<br>
+                <strong>To:</strong> ${t.toDate} ${t.toTime}<br>
+                <strong>Contact:</strong> ${t.contact}<br>
+                <strong>Status:</strong> <span style="color: ${t.status === 'approved' ? 'green' : t.status === 'rejected' ? 'red' : 'orange'}">${t.status}</span><br>
+                <hr />
+              </div>
+            `;
+          });
+        }).catch(err => container.innerHTML = `<p>Error: ${err.message}</p>`);
+    }
+  </script>
+</body>
+</html>
